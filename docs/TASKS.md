@@ -78,7 +78,7 @@ Overture Places + OSM (Overpass) → normalisasi/dedupe → skor kelengkapan + i
 
 ## Fase 1 — Antrean, Threads, Scheduler Dummy, Deploy Awal
 
-- [ ] **T-050 · Spec 009 antrean `jobs` + worker** 🟡 (M) · dep: T-003
+- [x] **T-050 · Spec 009 antrean `jobs` + worker** 🟡 (M) · dep: T-003
   `SKIP LOCKED`, retry eksponensial (1 → 5 → 15 mnt), dead-letter, `idempotency_key` unik.
   *Terima*: tes konkurensi dua worker tidak memproses job yang sama; job yang diulang tidak ganda.
 - [ ] **T-051 · Spec 010 channel Threads (TEXT)** 🔴 (M) · dep: T-050, S-1
