@@ -68,12 +68,12 @@ Overture Places + OSM (Overpass) → normalisasi/dedupe → skor kelengkapan + i
 - [x] **T-003 · Spec 001 skema DB + migrasi + RLS** (M) · dep: T-001
   Tabel sesuai ARCHITECTURE §6 (tanpa kolom `embedding`, tanpa rating), ekstensi `pg_trgm`, RLS, seed `regions` (Bali + sub-area), `sources` (overture, osm) dan `settings`.
   *Terima*: `supabase db reset` berjalan bersih di Supabase lokal; tes RLS lulus (anon tidak bisa baca tabel internal).
-- [ ] **T-004 · Config, logging, klien DB, klien LLM** (M) · dep: T-001
+- [x] **T-004 · Config, logging, klien DB, klien LLM** (M) · dep: T-001
   Pydantic Settings, `structlog` dengan `run_id`, pembungkus Claude API (retry, hitung token dan biaya ke `run_logs`).
   *Terima*: panggilan LLM ter-mock tercatat biayanya; env wajib divalidasi saat start.
 - [ ] **T-037 · Anggaran LLM harian** (S) · dep: T-004
   *Terima*: melewati batas menghentikan generasi, tidak mematikan publikasi dari buffer.
-- [ ] **T-060 · Spec 011 notifier Discord/Telegram** (S) · dep: T-004 *(dimajukan: dipakai T-052, T-054, T-055)*
+- [x] **T-060 · Spec 011 notifier Discord/Telegram** (S) · dep: T-004 *(dimajukan: dipakai T-052, T-054, T-055)*
   *Terima*: job dead, token hampir habis, buffer rendah, anggaran > 80% mengirim alert; tanpa webhook URL → hanya log.
 
 ## Fase 1 — Antrean, Threads, Scheduler Dummy, Deploy Awal
