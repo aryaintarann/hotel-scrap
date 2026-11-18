@@ -44,7 +44,7 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP", "ASYNC"]
-ignore = ["B008"]
+ignore = ["B008", "ASYNC230", "ASYNC240"]  # small local cache files; sync I/O is fine
 
 [tool.mypy]
 python_version = "3.12"
