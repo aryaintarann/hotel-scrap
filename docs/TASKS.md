@@ -84,7 +84,7 @@ Overture Places + OSM (Overpass) → normalisasi/dedupe → skor kelengkapan + i
 - [ ] **T-051 · Spec 010 channel Threads (TEXT)** 🔴 (M) · dep: T-050, S-1
   Alur container → cek status → publish, validasi 500 karakter (byte-aware untuk emoji), kuota `threads_publishing_limit`, token terenkripsi di `social_accounts`.
   *Terima*: kontrak diuji dengan respons ter-mock; satu posting ke akun uji berhasil.
-- [ ] **T-052 · Refresh token otomatis + alert** 🟡 (S) · dep: T-051, T-060
+- [x] **T-052 · Refresh token otomatis + alert** 🟡 (S) · dep: T-051, T-060
   *Terima*: token dengan sisa < 15 hari di-refresh; kegagalan memicu alert.
 - [ ] **T-054 · Scheduler slot 2 jam (WITA) + pemilih konten** 🔴 (M) · dep: T-050, T-051, T-060
   12 slot/hari, tick tiap menit, hormati `kill_switch`. Aturan variasi: bukan sudut sama dengan 3 posting terakhir, bukan artikel sama berturut-turut. Hanya pilih snippet yang artikelnya `published`. Slot telat ≤ 30 mnt → post; > 30 mnt → skip + log; tanpa catch-up beruntun.

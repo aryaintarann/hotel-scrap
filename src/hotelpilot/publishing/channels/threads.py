@@ -182,3 +182,33 @@ async def get_channel() -> ThreadsChannel | DummyChannel:
     if acct is None:
         return DummyChannel()
     return ThreadsChannel(*acct)
+
+
+REFRESH_WHEN_LEFT = timedelta(days=15)
+
+
+async def refresh_if_needed(now: datetime | None = None) -> str:
+    """Daily job: refresh the long-lived token when < 15 days remain; alert on failure."""
+    from hotelpilot.notify import alert
+
+    now = now or datetime.now(UTC)
+    acct = await ensure_account()
+    if acct is None:
+        return "dummy"
+    async with db.tx() as c:
+        expires = await db.val(
+            c,
+            "select token_expires_at from social_accounts"
+            " where channel = 'threads' and external_user_id = :u",
+            u=acct[0],
+        )
+    left = expires - now
+    if left >= REFRESH_WHEN_LEFT:
+        return "fresh"
+    try:
+        await ThreadsChannel(*acct).refresh_credentials()
+    except ThreadsError as e:
+        await alert("token_refresh_failed", f"Threads token refresh failed ({left.days} days left): {e}")
+        return "failed"
+    log.info("threads_token_refreshed", days_left_before=left.days)
+    return "refreshed"
