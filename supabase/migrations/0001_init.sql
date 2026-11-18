@@ -259,7 +259,7 @@ create table run_logs (
   llm_tokens_in int not null default 0,
   llm_tokens_out int not null default 0,
   llm_billed_tokens int not null default 0,
-  cost_usd numeric(12,6) not null default 0,
+  cost_usd numeric(16,10) not null default 0,
   duration_ms int not null default 0,
   error text,
   created_at timestamptz not null default now(),
